@@ -7,7 +7,8 @@ import 'info_card.dart';
 import 'side_menu_tile.dart';
 
 class SideMenu extends StatefulWidget {
-  const SideMenu({super.key, this.onMenuTap});
+  const SideMenu({super.key, required this.selectedMenu, this.onMenuTap});
+  final ValueNotifier<RiveAsset> selectedMenu;
   final ValueChanged<RiveAsset>? onMenuTap;
 
   @override
@@ -15,7 +16,6 @@ class SideMenu extends StatefulWidget {
 }
 
 class _SideMenuState extends State<SideMenu> {
-  RiveAsset selectedMenu = sideMenus.first;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,17 +56,17 @@ class _SideMenuState extends State<SideMenu> {
                       menu.input!.change(false);
                     });
                     setState(() {
-                      selectedMenu = menu;
+                      widget.selectedMenu.value = menu;
                     });
                     widget.onMenuTap?.call(menu);
                   },
-                  isActive: selectedMenu == menu,
+                  isActive: widget.selectedMenu.value == menu,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 24, top: 32, bottom: 16),
                 child: Text(
-                  "History".toUpperCase(),
+                  "Other".toUpperCase(),
                   style: Theme.of(context)
                       .textTheme
                       .titleMedium!
@@ -88,11 +88,11 @@ class _SideMenuState extends State<SideMenu> {
                       menu.input!.change(false);
                     });
                     setState(() {
-                      selectedMenu = menu;
+                      widget.selectedMenu.value = menu;
                     });
                     widget.onMenuTap?.call(menu);
                   },
-                  isActive: selectedMenu == menu,
+                  isActive: widget.selectedMenu.value == menu,
                 ),
               ),
             ],

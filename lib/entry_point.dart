@@ -35,6 +35,7 @@ class _EntryPointState extends State<EntryPoint>
   bool isSideMenuClosed = true;
 
   late ScrollController controller;
+  late ValueNotifier<RiveAsset> selectedMenu;
 
   @override
   void initState() {
@@ -55,6 +56,7 @@ class _EntryPointState extends State<EntryPoint>
     );
 
     controller = ScrollController();
+    selectedMenu = ValueNotifier(sideMenus.first);
     super.initState();
   }
 
@@ -62,6 +64,7 @@ class _EntryPointState extends State<EntryPoint>
   void dispose() {
     _animationController.dispose();
     controller.dispose();
+    selectedMenu.dispose();
     super.dispose();
   }
 
@@ -70,7 +73,7 @@ class _EntryPointState extends State<EntryPoint>
   late List widgetOptions = [
     HomeScreen(controller: controller),
     const OtherScreen(title: 'Search'),
-    const OtherScreen(title: 'Timer'),
+    const OtherScreen(title: 'History'),
     const OtherScreen(title: 'Notification'),
     const OtherScreen(title: 'Profile'),
   ];
@@ -90,6 +93,7 @@ class _EntryPointState extends State<EntryPoint>
             left: isSideMenuClosed ? -288 : 0,
             height: MediaQuery.of(context).size.height,
             child: SideMenu(
+              selectedMenu: selectedMenu,
               onMenuTap: (RiveAsset menu) {
                 openMenu(menu.title);
               },
@@ -162,6 +166,7 @@ class _EntryPointState extends State<EntryPoint>
                         bottomNavs[index].input!.change(true);
                         if (bottomNavs[index] != selectedBottomNav) {
                           setState(() {
+                            selectedMenu.value = handleBottom(index);
                             selectedBottomNav = bottomNavs[index];
                             selectedIndex = index;
                           });
@@ -222,7 +227,7 @@ class _EntryPointState extends State<EntryPoint>
       case 'search':
         index = 1;
         break;
-      case 'timer':
+      case 'history':
         index = 2;
         break;
       case 'notification':
@@ -251,6 +256,23 @@ class _EntryPointState extends State<EntryPoint>
         selectedBottomNav = bottomNavs[index];
         isSideMenuClosed = isSideBarClosed.value;
       });
+    }
+  }
+
+  RiveAsset handleBottom(int index) {
+    switch (index) {
+      case 0:
+        return sideMenus[index];
+      case 1:
+        return sideMenus[index];
+      case 2:
+        return sideMenu2[0];
+      case 3:
+        return sideMenu2[1];
+      case 4:
+        return sideMenu2[2];
+      default:
+        return sideMenus[0];
     }
   }
 }

@@ -49,18 +49,18 @@ List<RiveAsset> sideMenus = [
     stateMachineName: "SEARCH_Interactivity",
     title: "Search",
   ),
-  RiveAsset(
-    "assets/RiveAssets/icons.riv",
-    artboard: "LIKE/STAR",
-    stateMachineName: "STAR_Interactivity",
-    title: "Favorites",
-  ),
-  RiveAsset(
-    "assets/RiveAssets/icons.riv",
-    artboard: "CHAT",
-    stateMachineName: "CHAT_Interactivity",
-    title: "Help",
-  ),
+  // RiveAsset(
+  //   "assets/RiveAssets/icons.riv",
+  //   artboard: "LIKE/STAR",
+  //   stateMachineName: "STAR_Interactivity",
+  //   title: "Favorites",
+  // ),
+  // RiveAsset(
+  //   "assets/RiveAssets/icons.riv",
+  //   artboard: "CHAT",
+  //   stateMachineName: "CHAT_Interactivity",
+  //   title: "Help",
+  // ),
 ];
 
 List<RiveAsset> sideMenu2 = [
@@ -76,4 +76,8 @@ List<RiveAsset> sideMenu2 = [
     stateMachineName: "BELL_Interactivity",
     title: "Notification",
   ),
+  RiveAsset("assets/RiveAssets/icons.riv",
+      artboard: "USER",
+      stateMachineName: "USER_Interactivity",
+      title: "Profile"),
 ];
