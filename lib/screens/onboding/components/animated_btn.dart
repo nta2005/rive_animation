@@ -26,11 +26,11 @@ class AnimatedBtn extends StatelessWidget {
               "assets/RiveAssets/button.riv",
               controllers: [_btnAnimationColtroller],
             ),
-            Positioned.fill(
+            const Positioned.fill(
               top: 8,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Icon(CupertinoIcons.arrow_right),
                   SizedBox(width: 8),
                   Text(

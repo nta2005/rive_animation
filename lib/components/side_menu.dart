@@ -7,7 +7,8 @@ import 'info_card.dart';
 import 'side_menu_tile.dart';
 
 class SideMenu extends StatefulWidget {
-  const SideMenu({super.key});
+  const SideMenu({super.key, this.onMenuTap});
+  final ValueChanged<RiveAsset>? onMenuTap;
 
   @override
   State<SideMenu> createState() => _SideMenuState();
@@ -27,8 +28,8 @@ class _SideMenuState extends State<SideMenu> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const InfoCard(
-                name: "Abu Anwar",
-                profession: "YouTuber",
+                name: "nta2005",
+                profession: "Mobile Developer",
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 24, top: 32, bottom: 16),
@@ -57,6 +58,7 @@ class _SideMenuState extends State<SideMenu> {
                     setState(() {
                       selectedMenu = menu;
                     });
+                    widget.onMenuTap?.call(menu);
                   },
                   isActive: selectedMenu == menu,
                 ),
@@ -88,6 +90,7 @@ class _SideMenuState extends State<SideMenu> {
                     setState(() {
                       selectedMenu = menu;
                     });
+                    widget.onMenuTap?.call(menu);
                   },
                   isActive: selectedMenu == menu,
                 ),

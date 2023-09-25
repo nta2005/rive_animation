@@ -13,6 +13,8 @@ import 'components/animated_bar.dart';
 import 'models/menu_btn.dart';
 import 'models/rive_asset.dart';
 
+import 'dart:developer' as dev;
+
 class EntryPoint extends StatefulWidget {
   const EntryPoint({super.key});
 
@@ -87,7 +89,11 @@ class _EntryPointState extends State<EntryPoint>
             width: 288,
             left: isSideMenuClosed ? -288 : 0,
             height: MediaQuery.of(context).size.height,
-            child: const SideMenu(),
+            child: SideMenu(
+              onMenuTap: (RiveAsset menu) {
+                openMenu(menu.title);
+              },
+            ),
           ),
           Transform(
             alignment: Alignment.center,
@@ -202,5 +208,49 @@ class _EntryPointState extends State<EntryPoint>
         ),
       ),
     );
+  }
+
+  void openMenu(String menu) {
+    menu = menu.toLowerCase();
+
+    int index = 0;
+
+    switch (menu) {
+      case 'home':
+        index = 0;
+        break;
+      case 'search':
+        index = 1;
+        break;
+      case 'timer':
+        index = 2;
+        break;
+      case 'notification':
+        index = 3;
+        break;
+      case 'profile':
+        index = 4;
+        break;
+      default:
+        index = -1;
+        dev.log(menu);
+    }
+
+    if (index != selectedIndex) {
+      if (index == -1) {
+        return;
+      }
+      isSideBarClosed.value = !isSideBarClosed.value;
+      if (isSideMenuClosed) {
+        _animationController.forward();
+      } else {
+        _animationController.reverse();
+      }
+      setState(() {
+        selectedIndex = index;
+        selectedBottomNav = bottomNavs[index];
+        isSideMenuClosed = isSideBarClosed.value;
+      });
+    }
   }
 }
